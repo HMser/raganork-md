@@ -17,7 +17,7 @@ var need_acc = "*_Need an instagram username!_*";
 var fail = "*_Download failed! Check your link and try again_*";
 var need_acc_s = "_Need an instagram username or link!_";
 let sourav = setting.MODE == 'public' ? false : true
-Module({ pattern: 'insta ?(.*)', fromMe: sourav, desc:'Downloads post/reel/igtv from instagram',usage:'insta link or reply to a link'}, (async (msg, query) => {
+Module({ pattern: 'insta ?(.*)', fromMe: w, desc:'Downloads post/reel/igtv from instagram',usage:'insta link or reply to a link'}, (async (msg, query) => {
 var q = !msg.reply_message.message ? query[1] : msg.reply_message.message
 if (!q)  return await msg.client.sendMessage(msg.jid, { text: "_*Couldn't read link. Use .insta link*_" },{ quoted: msg.data })
 if (q && !q.includes('instagram.com')) return await msg.client.sendMessage(msg.jid, { text: need },{ quoted: msg.data })
@@ -36,7 +36,7 @@ stream.then(async (video) => {
 await msg.client.sendMessage(msg.jid, { [type]: video },{ quoted: msg.data })
 })};}
 }));
-Module({ pattern: 'ig ?(.*)', fromMe: sourav, desc:'Gets account info from instagram',usage:'ig username'}, (async (msg, query) => {
+Module({ pattern: 'ig ?(.*)', fromMe: w, desc:'Gets account info from instagram',usage:'ig username'}, (async (msg, query) => {
     if (query[1] === '') return await msg.client.sendMessage(msg.jid, { text: need_acc },{ quoted: msg.data })
     var res = await getStalk(query[1])
     if (res === "false") return await msg.client.sendMessage(msg.jid, { text: "*_Username invalid!_*" },{ quoted: msg.data })
@@ -44,7 +44,7 @@ Module({ pattern: 'ig ?(.*)', fromMe: sourav, desc:'Gets account info from insta
     await msg.client.sendMessage(msg.jid, { image: buffer, caption: '_*Name:*_ ' + `${res.fullname}` + '\n _*Bio:*_ ' + `${res.biography}`+ '\n _*Private account:*_ ' + `${res.is_private} ` + '\n _*Followers:*_ ' + `${res.followers}` + '\n _*Following:*_ ' + `${res.following}` + '\n _*Posts:*_ ' + `${res.post_count}` + '\n _*Verified:*_ ' + `${res.is_verified} ` + '\n _*IGTV videos:*_ ' + `${res.total_igtv_videos}`}, {quoted: msg.data});
     }));
 /*
-skl.addCommand({ pattern: 'story ?(.*)', fromMe: sourav, desc:'Downloads full/single story from instagram',usage:'.story username or link'}, (async (msg, query) => {
+skl.addCommand({ pattern: 'story ?(.*)', fromMe: w, desc:'Downloads full/single story from instagram',usage:'.story username or link'}, (async (msg, query) => {
 if (query[1] === '') return await msg.client.sendMessage(msg.jid, need_acc_s, MessageType.text, {quoted: msg.data});
 var user = query[1];
 var res = await getStory(user,v)
